@@ -9,6 +9,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import storm.applications.bolt.base.AbstractBolt;
 import storm.applications.constants.SentimentAnalysisConstants.Conf;
 import storm.applications.constants.SentimentAnalysisConstants.Field;
 import storm.applications.model.sentiment.SentimentClassifier;

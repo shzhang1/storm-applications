@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
+
+import storm.applications.bolt.base.AbstractBolt;
 import storm.applications.constants.SmartGridConstants.Component;
 import storm.applications.constants.SmartGridConstants.Field;
 import storm.applications.util.collections.FixedMap;

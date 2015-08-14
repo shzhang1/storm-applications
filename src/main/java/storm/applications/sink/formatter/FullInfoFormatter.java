@@ -17,7 +17,7 @@ public class FullInfoFormatter extends Formatter {
         String values = "";
         for (int i=0; i<tuple.size(); i++) {
             if (i != 0) values += ", ";
-            values += String.format("%s=%s", schema.get(i), tuple.getValue(i));
+            values += String.format("%s = %s", schema.get(i), tuple.getValue(i));
         }
         
         return String.format(TEMPLATE, tuple.getSourceComponent(), tuple.getSourceTask(),

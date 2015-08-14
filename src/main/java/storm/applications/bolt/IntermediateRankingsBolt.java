@@ -20,6 +20,7 @@ package storm.applications.bolt;
 import backtype.storm.tuple.Tuple;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import storm.applications.bolt.base.AbstractRankerBolt;
 import storm.applications.tools.Rankable;
 import storm.applications.tools.RankableObjectWithFields;
 
@@ -46,13 +47,13 @@ public final class IntermediateRankingsBolt extends AbstractRankerBolt {
     }
 
     @Override
-    void updateRankingsWithTuple(Tuple tuple) {
+    protected void updateRankingsWithTuple(Tuple tuple) {
         Rankable rankable = RankableObjectWithFields.from(tuple);
         super.getRankings().updateWith(rankable);
     }
 
     @Override
-    Logger getLogger() {
+    protected Logger getLogger() {
         return LOG;
     }
 }

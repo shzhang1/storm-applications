@@ -3,6 +3,7 @@ package storm.applications.topology;
 import backtype.storm.Config;
 import backtype.storm.generated.StormTopology;
 import org.slf4j.Logger;
+import storm.applications.topology.base.BasicTopology;
 
 /**
  *

@@ -10,6 +10,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import storm.applications.bolt.base.AbstractBolt;
 import storm.applications.constants.SpamFilterConstants.Conf;
 import static storm.applications.constants.SpamFilterConstants.DEFAULT_WORDMAP;
 import storm.applications.constants.SpamFilterConstants.Field;

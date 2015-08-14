@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import storm.applications.bolt.base.AbstractBolt;
 import storm.applications.constants.BaseConstants.BaseConf;
 import storm.applications.constants.TrendingTopicsConstants.Field;
 import storm.applications.tools.NthLastModifiedTimeTracker;
@@ -51,16 +52,16 @@ public class RollingCountBolt extends AbstractBolt {
     }
     
     public RollingCountBolt(int emitFrequencyInSeconds) {
-        this.emitFrequencyInSeconds = emitFrequencyInSeconds;
+        this.emitFrequencyInSeconds = emitFrequencyInSeconds;//default is 2
     }
 
     @Override
     public void initialize() {
         windowLengthInSeconds = config.getInt(String.format(BaseConf.ROLLING_COUNT_WINDOW_LENGTH, configPrefix), 300);
         
-        int numChunks = windowLengthInSeconds/emitFrequencyInSeconds;
+        int numChunks = windowLengthInSeconds/emitFrequencyInSeconds;//10 / 2 = 5
         
-        counter = new SlidingWindowCounter<>(numChunks);
+        counter = new SlidingWindowCounter<>(numChunks);//numChunks is assigned to slots, which is parallism region number.
         lastModifiedTracker = new NthLastModifiedTimeTracker(numChunks);
     }
 
@@ -95,7 +96,7 @@ public class RollingCountBolt extends AbstractBolt {
     }
 
     private void countObjAndAck(Tuple tuple) {
-        Object obj = tuple.getValue(0);
+        Object obj = tuple.getValue(0);// in terms of word.
         counter.incrementCount(obj);
         collector.ack(tuple);
     }

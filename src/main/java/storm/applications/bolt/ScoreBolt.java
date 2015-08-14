@@ -6,6 +6,8 @@ import java.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import static storm.applications.constants.VoIPSTREAMConstants.*;
+
+import storm.applications.bolt.base.AbstractScoreBolt;
 import storm.applications.model.cdr.CallDetailRecord;
 
 /**

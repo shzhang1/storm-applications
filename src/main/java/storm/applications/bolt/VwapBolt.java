@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeComparator;
+import storm.applications.bolt.base.AbstractBolt;
+
 import static storm.applications.constants.BargainIndexConstants.*;
 
 /**
@@ -52,7 +54,6 @@ public class VwapBolt extends AbstractBolt {
             if (vwap != null) {
                 collector.emit(new Values(stock, vwap.getVwap(), vwap.getStartDate(), vwap.getEndDate()));
             }
-            
             vwap = new Vwap(volume, price, date, date.plusSeconds(inteval));
             stocks.put(stock, vwap);
 

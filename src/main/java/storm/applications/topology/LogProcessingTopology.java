@@ -13,6 +13,7 @@ import storm.applications.bolt.VolumeCountBolt;
 import static storm.applications.constants.LogProcessingConstants.*;
 import storm.applications.sink.BaseSink;
 import storm.applications.spout.AbstractSpout;
+import storm.applications.topology.base.AbstractTopology;
 
 /**
  * https://github.com/ashrithr/LogEventsProcessing

@@ -25,6 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import static storm.applications.constants.FraudDetectionConstants.*;
 import storm.applications.bolt.FraudPredictorBolt;
+import storm.applications.topology.base.BasicTopology;
 
 /**
  * Storm topolgy driver for outlier detection

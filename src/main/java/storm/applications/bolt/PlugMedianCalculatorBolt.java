@@ -6,6 +6,8 @@ import backtype.storm.tuple.Values;
 import java.util.HashMap;
 import java.util.Map;
 import static storm.applications.constants.SmartGridConstants.*;
+
+import storm.applications.bolt.base.AbstractBolt;
 import storm.applications.util.math.RunningMedianCalculator;
 
 /**

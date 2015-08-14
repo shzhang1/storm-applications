@@ -5,6 +5,8 @@ import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 import org.apache.commons.lang.StringUtils;
 import static storm.applications.constants.FraudDetectionConstants.*;
+
+import storm.applications.bolt.base.AbstractBolt;
 import storm.applications.model.fraud.predictor.MarkovModelPredictor;
 import storm.applications.model.fraud.predictor.ModelBasedPredictor;
 import storm.applications.model.fraud.predictor.Prediction;

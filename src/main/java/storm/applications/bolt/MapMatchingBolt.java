@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import storm.applications.bolt.base.AbstractBolt;
 import storm.applications.constants.TrafficMonitoringConstants.Conf;
 import storm.applications.constants.TrafficMonitoringConstants.Field;
 import storm.applications.model.gis.GPSRecord;

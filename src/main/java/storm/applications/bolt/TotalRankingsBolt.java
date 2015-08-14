@@ -20,6 +20,7 @@ package storm.applications.bolt;
 import backtype.storm.tuple.Tuple;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import storm.applications.bolt.base.AbstractRankerBolt;
 import storm.applications.tools.Rankings;
 
 /**
@@ -45,14 +46,14 @@ public final class TotalRankingsBolt extends AbstractRankerBolt {
     }
 
     @Override
-    void updateRankingsWithTuple(Tuple tuple) {
+    protected void updateRankingsWithTuple(Tuple tuple) {
         Rankings rankingsToBeMerged = (Rankings) tuple.getValue(0);
         super.getRankings().updateWith(rankingsToBeMerged);
         super.getRankings().pruneZeroCounts();
     }
 
     @Override
-    Logger getLogger() {
+    protected Logger getLogger() {
         return LOG;
     }
 }

@@ -18,21 +18,9 @@ import java.util.Properties;
 import java.util.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import storm.applications.topology.AdsAnalyticsTopology;
-import storm.applications.topology.BargainIndexTopology;
-import storm.applications.topology.ClickAnalyticsTopology;
-import storm.applications.topology.FraudDetectionTopology;
-import storm.applications.topology.LinearRoadTopology;
-import storm.applications.topology.LogProcessingTopology;
-import storm.applications.topology.MachineOutlierTopology;
-import storm.applications.topology.ReinforcementLearnerTopology;
-import storm.applications.topology.SentimentAnalysisTopology;
-import storm.applications.topology.SpamFilterTopology;
-import storm.applications.topology.SpikeDetectionTopology;
-import storm.applications.topology.TrafficMonitoringTopology;
-import storm.applications.topology.TrendingTopicsTopology;
-import storm.applications.topology.VoIPSTREAMTopology;
-import storm.applications.topology.WordCountTopology;
+import storm.applications.topology.*;
+import storm.applications.topology.PrimitiveOperators.FilterTopology;
+import storm.applications.topology.PrimitiveOperators.WindowAggregateTopology;
 import storm.applications.util.config.Configuration;
 
 /**
@@ -84,6 +72,8 @@ public class StormRunner {
         driver.addApp("voipstream"           , VoIPSTREAMTopology.class);
         driver.addApp("word-count"           , WordCountTopology.class);
         driver.addApp("traffic-monitoring"   , TrafficMonitoringTopology.class);
+        driver.addApp("filter", FilterTopology.class);
+        driver.addApp("window-aggregate", WindowAggregateTopology.class);
     }
     
     public void run() throws InterruptedException, AlreadyAliveException, InvalidTopologyException {
@@ -168,7 +158,7 @@ public class StormRunner {
         LOG.info("Topology {} submitted", topologyName);
         cluster.submitTopology(topologyName, conf, topology);
         Thread.sleep((long) runtimeInSeconds * 1000);
-        
+
         cluster.killTopology(topologyName);
         LOG.info("Topology {} finished", topologyName);
         

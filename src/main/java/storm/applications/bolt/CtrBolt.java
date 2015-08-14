@@ -1,11 +1,12 @@
 package storm.applications.bolt;
 
-import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 import java.util.HashMap;
 import java.util.Map;
+
+import storm.applications.bolt.base.AbstractBolt;
 import storm.applications.constants.AdsAnalyticsConstants.Field;
 import storm.applications.constants.AdsAnalyticsConstants.Stream;
 import storm.applications.model.ads.AdEvent;

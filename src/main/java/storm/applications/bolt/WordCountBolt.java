@@ -1,12 +1,17 @@
 package storm.applications.bolt;
 
+import backtype.storm.spout.SpoutOutputCollector;
+import backtype.storm.task.TopologyContext;
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 import backtype.storm.utils.MutableLong;
 import java.util.HashMap;
 import java.util.Map;
+
+import storm.applications.bolt.base.AbstractBolt;
 import storm.applications.constants.WordCountConstants.Field;
+import storm.applications.hooks.BoltMeterHook;
 
 public class WordCountBolt extends AbstractBolt {
     private final Map<String, MutableLong> counts = new HashMap<>();
@@ -15,6 +20,7 @@ public class WordCountBolt extends AbstractBolt {
     public Fields getDefaultFields() {
         return new Fields(Field.WORD, Field.COUNT);
     }
+
 
     @Override
     public void execute(Tuple input) {

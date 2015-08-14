@@ -3,6 +3,7 @@ package storm.applications.bolt;
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
+import storm.applications.bolt.base.AbstractBolt;
 import storm.applications.constants.SmartGridConstants.Field;
 import storm.applications.constants.SmartGridConstants.SlidingWindowAction;
 import storm.applications.util.math.RunningMedianCalculator;

@@ -77,6 +77,15 @@ public final class SlidingWindowCounter<T> implements Serializable {
         objCounter.incrementCount(obj, headSlot, increment);
     }
 
+
+    public long getCount(T obj){
+        return objCounter.getCount(obj);
+    }
+
+    public Map<T, Long> getCounts() {
+        Map<T, Long> counts = objCounter.getCounts();
+        return counts;
+    }
     /**
      * Return the current (total) counts of all tracked objects, then advance the window.
      * <p/>

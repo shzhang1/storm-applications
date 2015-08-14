@@ -6,6 +6,8 @@ import java.util.Map;
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
+import storm.applications.bolt.base.AbstractBolt;
+
 import static storm.applications.constants.MachineOutlierConstants.*;
 
 /**

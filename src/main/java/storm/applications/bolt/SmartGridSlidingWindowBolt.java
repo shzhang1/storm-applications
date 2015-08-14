@@ -5,6 +5,8 @@ import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 import java.util.List;
 import static storm.applications.constants.SmartGridConstants.*;
+
+import storm.applications.bolt.base.AbstractBolt;
 import storm.applications.util.window.SlidingWindow;
 import storm.applications.util.window.SlidingWindowCallback;
 import storm.applications.util.window.SlidingWindowEntry;

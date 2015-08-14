@@ -6,6 +6,7 @@ import backtype.storm.tuple.Values;
 import java.util.Map;
 import java.util.StringTokenizer;
 import org.apache.commons.lang3.StringUtils;
+import storm.applications.bolt.base.AbstractBolt;
 import storm.applications.constants.TrendingTopicsConstants.Field;
 
 /**

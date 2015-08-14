@@ -14,6 +14,7 @@ import storm.applications.bolt.SmartGridSlidingWindowBolt;
 import static storm.applications.constants.SmartGridConstants.*;
 import storm.applications.sink.BaseSink;
 import storm.applications.spout.AbstractSpout;
+import storm.applications.topology.base.AbstractTopology;
 
 /**
  *

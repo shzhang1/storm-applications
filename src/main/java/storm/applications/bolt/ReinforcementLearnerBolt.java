@@ -20,9 +20,10 @@ package storm.applications.bolt;
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import static storm.applications.constants.ReinforcementLearnerConstants.*;
+
+import storm.applications.bolt.base.AbstractBolt;
 import storm.applications.model.learner.ReinforcementLearner;
 import storm.applications.model.learner.ReinforcementLearnerFactory;
 

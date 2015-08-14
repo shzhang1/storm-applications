@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import static storm.applications.constants.BargainIndexConstants.*;
 import storm.applications.bolt.BargainIndexBolt;
 import storm.applications.bolt.VwapBolt;
+import storm.applications.topology.base.BasicTopology;
 
 /**
  * 

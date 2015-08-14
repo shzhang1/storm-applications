@@ -26,6 +26,7 @@ import static storm.applications.constants.ReinforcementLearnerConstants.*;
 import storm.applications.bolt.ReinforcementLearnerBolt;
 import storm.applications.sink.BaseSink;
 import storm.applications.spout.AbstractSpout;
+import storm.applications.topology.base.AbstractTopology;
 
 /**
  * Builds and submits storm topology for reinforcement learning

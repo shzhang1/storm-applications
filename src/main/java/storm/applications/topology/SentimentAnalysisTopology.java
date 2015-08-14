@@ -6,6 +6,8 @@ import backtype.storm.tuple.Fields;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import storm.applications.bolt.CalculateSentimentBolt;
+import storm.applications.topology.base.BasicTopology;
+
 import static storm.applications.constants.SentimentAnalysisConstants.*;
 
 /**

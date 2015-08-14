@@ -6,6 +6,8 @@ import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 import java.util.HashMap;
 import java.util.Map;
+
+import storm.applications.bolt.base.AbstractBolt;
 import storm.applications.constants.SmartGridConstants.*;
 import storm.applications.util.math.AverageTracker;
 import storm.applications.util.math.SummaryArchive;

@@ -16,6 +16,7 @@ import storm.applications.bolt.RCRBolt;
 import storm.applications.bolt.ScoreBolt;
 import storm.applications.bolt.URLBolt;
 import storm.applications.bolt.VariationDetectorBolt;
+import storm.applications.topology.base.BasicTopology;
 
 /**
  * 

@@ -4,6 +4,8 @@ import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 import static storm.applications.constants.ClickAnalyticsConstants.*;
+
+import storm.applications.bolt.base.AbstractBolt;
 import storm.applications.util.geoip.IPLocation;
 import storm.applications.util.geoip.IPLocationFactory;
 import storm.applications.util.geoip.Location;

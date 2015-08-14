@@ -58,6 +58,7 @@ public interface BaseConstants {
         String GEOIP2_DB = "storm.geoip2.db";
         
         String DEBUG_ON = Config.TOPOLOGY_DEBUG;
+        String GENERATOR_COUNT ="%s.generator.count";
     }
     
     interface BaseConst {

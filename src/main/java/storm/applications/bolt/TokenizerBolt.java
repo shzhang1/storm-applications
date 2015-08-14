@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.commons.lang.mutable.MutableInt;
+import storm.applications.bolt.base.AbstractBolt;
 import storm.applications.constants.SpamFilterConstants.*;
 
 /**

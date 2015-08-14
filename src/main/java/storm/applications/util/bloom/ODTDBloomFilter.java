@@ -1,5 +1,6 @@
 package storm.applications.util.bloom;
 
+import org.apache.hadoop.util.bloom.CountingBloomFilter;
 import storm.applications.util.bloom.BloomCalculations;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;

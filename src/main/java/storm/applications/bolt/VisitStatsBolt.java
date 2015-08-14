@@ -3,6 +3,7 @@ package storm.applications.bolt;
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
+import storm.applications.bolt.base.AbstractBolt;
 
 import static storm.applications.constants.ClickAnalyticsConstants.*;
 

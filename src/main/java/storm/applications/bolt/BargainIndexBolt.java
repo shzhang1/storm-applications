@@ -6,6 +6,8 @@ import backtype.storm.tuple.Values;
 import java.util.HashMap;
 import java.util.Map;
 import org.joda.time.DateTime;
+import storm.applications.bolt.base.AbstractBolt;
+
 import static storm.applications.constants.BargainIndexConstants.*;
 
 /**

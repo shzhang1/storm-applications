@@ -6,6 +6,8 @@ import backtype.storm.tuple.Values;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import storm.applications.bolt.base.AbstractBolt;
 import storm.applications.constants.TrafficMonitoringConstants.Field;
 import storm.applications.model.gis.Road;
 

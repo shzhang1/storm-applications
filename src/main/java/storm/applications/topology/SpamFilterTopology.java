@@ -11,6 +11,7 @@ import storm.applications.bolt.WordProbabilityBolt;
 import static storm.applications.constants.SpamFilterConstants.*;
 import storm.applications.sink.BaseSink;
 import storm.applications.spout.AbstractSpout;
+import storm.applications.topology.base.AbstractTopology;
 
 /**
  *

@@ -3,6 +3,7 @@ package storm.applications.bolt;
 import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 import org.apache.log4j.Logger;
+import storm.applications.bolt.base.AbstractScoreBolt;
 import storm.applications.model.cdr.CallDetailRecord;
 
 /**

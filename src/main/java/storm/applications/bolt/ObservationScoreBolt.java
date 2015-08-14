@@ -6,6 +6,8 @@ import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 import static storm.applications.constants.MachineOutlierConstants.*;
+
+import storm.applications.bolt.base.AbstractBolt;
 import storm.applications.model.scorer.DataInstanceScorer;
 import storm.applications.model.scorer.DataInstanceScorerFactory;
 import storm.applications.model.scorer.ScorePackage;

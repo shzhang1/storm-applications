@@ -8,6 +8,7 @@ import org.apache.commons.lang.math.NumberUtils;
 import storm.applications.util.data.DataTypeUtils;
 
 public class Configuration extends Config {
+    String GENERATOR_COUNT          = "generator.count";
     public static final String METRICS_ENABLED        = "metrics.enabled";
     public static final String METRICS_REPORTER       = "metrics.reporter";
     public static final String METRICS_INTERVAL_VALUE = "metrics.interval.value";

@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import storm.applications.bolt.AlertTriggerBolt;
 import storm.applications.bolt.ObservationScoreBolt;
 import storm.applications.bolt.SlidingWindowStreamAnomalyScoreBolt;
+import storm.applications.topology.base.BasicTopology;
+
 import static storm.applications.constants.MachineOutlierConstants.*;
 
 public class MachineOutlierTopology extends BasicTopology {

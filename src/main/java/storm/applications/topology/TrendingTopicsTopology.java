@@ -12,6 +12,8 @@ import storm.applications.bolt.TotalRankingsBolt;
 import storm.applications.constants.TrendingTopicsConstants.Component;
 import storm.applications.constants.TrendingTopicsConstants.Conf;
 import storm.applications.constants.TrendingTopicsConstants.Field;
+import storm.applications.topology.base.BasicTopology;
+
 import static storm.applications.constants.TrendingTopicsConstants.PREFIX;
 
 public class TrendingTopicsTopology extends BasicTopology {

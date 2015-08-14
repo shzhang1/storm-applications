@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import storm.applications.bolt.SplitSentenceBolt;
 import storm.applications.bolt.WordCountBolt;
+import storm.applications.topology.base.BasicTopology;
+
 import static storm.applications.constants.WordCountConstants.*;
 
 public class WordCountTopology extends BasicTopology {
@@ -22,19 +24,18 @@ public class WordCountTopology extends BasicTopology {
     @Override
     public void initialize() {
         super.initialize();
-        
+
         splitSentenceThreads = config.getInt(Conf.SPLITTER_THREADS, 1);
         wordCountThreads     = config.getInt(Conf.COUNTER_THREADS, 1);
     }
 
     @Override
     public StormTopology buildTopology() {
-        spout.setFields(new Fields(Field.TEXT));
+        spout.setFields(new Fields(Field.TEXT));//output of a spouts
         
         builder.setSpout(Component.SPOUT, spout, spoutThreads);
         
-        builder.setBolt(Component.SPLITTER, new SplitSentenceBolt(), splitSentenceThreads)
-               .shuffleGrouping(Component.SPOUT);
+        builder.setBolt(Component.SPLITTER, new SplitSentenceBolt(), splitSentenceThreads).shuffleGrouping(Component.SPOUT);
         
         builder.setBolt(Component.COUNTER, new WordCountBolt(), wordCountThreads)
                .fieldsGrouping(Component.SPLITTER, new Fields(Field.WORD));

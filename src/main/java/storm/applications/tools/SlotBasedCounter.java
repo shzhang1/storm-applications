@@ -47,7 +47,9 @@ public final class SlotBasedCounter<T> implements Serializable {
             return counts[slot];
         }
     }
-
+    public long getCount(T obj) {
+        return computeTotalCount(obj);
+    }
     public Map<T, Long> getCounts() {
         Map<T, Long> result = new HashMap<T, Long>();
         for (T obj : objToCounts.keySet()) {

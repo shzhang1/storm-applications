@@ -6,6 +6,8 @@ import backtype.storm.tuple.Values;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import storm.applications.bolt.base.AbstractBolt;
 import storm.applications.constants.SpamFilterConstants.Conf;
 import storm.applications.constants.SpamFilterConstants.Field;
 import storm.applications.model.spam.Word;

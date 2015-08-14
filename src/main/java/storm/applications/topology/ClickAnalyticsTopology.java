@@ -12,6 +12,7 @@ import storm.applications.bolt.RepeatVisitBolt;
 import storm.applications.bolt.VisitStatsBolt;
 import storm.applications.sink.BaseSink;
 import storm.applications.spout.AbstractSpout;
+import storm.applications.topology.base.AbstractTopology;
 
 public class ClickAnalyticsTopology extends AbstractTopology {
     private static final Logger LOG = LoggerFactory.getLogger(ClickAnalyticsTopology.class);

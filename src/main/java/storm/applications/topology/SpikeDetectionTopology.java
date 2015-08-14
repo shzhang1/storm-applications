@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import storm.applications.bolt.MovingAverageBolt;
 import storm.applications.bolt.SpikeDetectionBolt;
+import storm.applications.topology.base.BasicTopology;
+
 import static storm.applications.constants.SpikeDetectionConstants.*;
 /**
  * Detects spikes in values emitted from sensors.

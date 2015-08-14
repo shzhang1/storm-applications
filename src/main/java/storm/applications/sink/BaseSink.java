@@ -2,7 +2,7 @@ package storm.applications.sink;
 
 import backtype.storm.tuple.Fields;
 import org.slf4j.Logger;
-import storm.applications.bolt.AbstractBolt;
+import storm.applications.bolt.base.AbstractBolt;
 import storm.applications.constants.BaseConstants.BaseConf;
 import storm.applications.sink.formatter.BasicFormatter;
 import storm.applications.sink.formatter.Formatter;
