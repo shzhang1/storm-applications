@@ -14,6 +14,7 @@ import storm.applications.util.math.RandomUtil;
 public class TradeQuoteSimulatedSpout extends StockPriceSpout {
     private static Logger LOG = LoggerFactory.getLogger(TradeQuoteSimulatedSpout.class);
 
+
     @Override
     public void nextTuple() {
         Quote quote = queue.poll();

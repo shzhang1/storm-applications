@@ -25,7 +25,7 @@ public abstract class AbstractSpout extends BaseRichSpout {
     protected SpoutOutputCollector collector;
     protected TopologyContext context;
     protected Map<String, Fields> fields;
-    
+
     public AbstractSpout() {
         fields = new HashMap<>();
     }

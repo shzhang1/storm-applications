@@ -26,7 +26,7 @@ public class TwitterStreamingSpout extends AbstractSpout {
     private LinkedBlockingQueue<JSONObject> queue;
     private TwitterStream twitterStream;
     private FilterQuery filterQuery;
-    
+
     @Override
     public void initialize() {
         this.queue = new LinkedBlockingQueue<>(1000);

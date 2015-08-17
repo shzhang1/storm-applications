@@ -22,7 +22,8 @@ import java.util.Map;
 public class GeneratorSpout extends AbstractSpout {
     private static final Logger LOG = LoggerFactory.getLogger(GeneratorSpout.class);
     private Generator generator;
-
+    private long count=100000000;
+    StreamValues values=null;
     @Override
     protected void initialize() {
         String generatorClass = config.getString(getConfigKey(BaseConf.SPOUT_GENERATOR));
@@ -32,22 +33,29 @@ public class GeneratorSpout extends AbstractSpout {
 
     @Override
     public void nextTuple() {
-        StreamValues values = generator.generate();
-//        if (values == null) {
-//            Map conf = Utils.readStormConfig();
-//            Nimbus.Client client = NimbusClient.getConfiguredClient(conf).getClient();
-//            try {
-//                List<TopologySummary> topologyList = client.getClusterInfo().get_topologies();
-//                KillOptions killOpts = new KillOptions();
-//                    //killOpts.set_wait_secs(waitSeconds) // time to wait before killing
-//                client.killTopologyWithOpts(topologyList.get(0).get_name(), killOpts); //provide topology name
-//
-//            } catch (TException e) {
-//                e.printStackTrace();
-//            } catch (NotAliveException e) {
-//                e.printStackTrace();
-//            }
-//        }
+    	if(count-->0){
+        values = generator.generate();
+    	}else{
+    		values=null;
+    	}
+        if (values == null) {
+            Map conf = Utils.readStormConfig();
+            Nimbus.Client client = NimbusClient.getConfiguredClient(conf).getClient();
+            try {
+                List<TopologySummary> topologyList = client.getClusterInfo().get_topologies();
+              while(topologyList.size()==0)
+                  topologyList = client.getClusterInfo().get_topologies();
+
+                KillOptions killOpts = new KillOptions();
+                    //killOpts.set_wait_secs(waitSeconds) // time to wait before killing
+                client.killTopologyWithOpts(topologyList.get(0).get_name(), killOpts); //provide topology name
+
+            } catch (TException e) {
+                e.printStackTrace();
+            } catch (NotAliveException e) {
+                e.printStackTrace();
+            }
+        }
         if(values!=null) {
             collector.emit(values.getStreamId(), values);
         }

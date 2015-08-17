@@ -50,7 +50,7 @@ public class ACDBolt extends AbstractScoreBolt {
                     collector.emit(new Values(number, timestamp, score, cdr));
                     map.remove(key);
                 } else {
-                    LOG.warn(String.format("Inconsistent entry: source=%s; %s",
+                    LOG.debug(String.format("Inconsistent entry: source=%s; %s",
                             input.getSourceComponent(), e.toString()));
                 }
             } else {

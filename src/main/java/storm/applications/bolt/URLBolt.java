@@ -42,8 +42,8 @@ public class URLBolt extends AbstractScoreBolt {
                 collector.emit(new Values(number, timestamp, score, cdr));
                 map.remove(key);
             } else {
-                LOG.warn(String.format("Inconsistent entry: source=%s; %s",
-                        input.getSourceComponent(), e.toString()));
+                //LOG.warn(String.format("Inconsistent entry: source=%s; %s",
+                 //       input.getSourceComponent(), e.toString()));
             }
         } else {
             Entry e = new Entry(cdr);

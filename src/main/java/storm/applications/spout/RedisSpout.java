@@ -23,7 +23,8 @@ public class RedisSpout extends AbstractSpout {
     private LinkedBlockingQueue<String> queue;
     private JedisPool pool;
     private Parser parser;
-   
+
+
     @Override
     protected void initialize() {
         String parserClass = config.getString(getConfigKey(BaseConf.SPOUT_PARSER));

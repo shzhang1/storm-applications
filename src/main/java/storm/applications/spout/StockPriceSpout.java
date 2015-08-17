@@ -27,6 +27,7 @@ public class StockPriceSpout extends AbstractSpout {
     private int days;
     private int interval;
 
+
     @Override
     public void initialize() {
         days     = config.getInt(Conf.SPOUT_DAYS);

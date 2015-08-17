@@ -34,6 +34,7 @@ public class BufferedReaderSpout extends AbstractSpout {
     protected int taskId;
     protected int numTasks;
 
+
     @Override
     public void initialize() {
         taskId   = context.getThisTaskIndex();//context.getThisTaskId();

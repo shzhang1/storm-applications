@@ -28,7 +28,8 @@ public class SocketSpout extends AbstractSpout {
     
     private ServerSocket server;
     private BufferedReader reader;
-    
+
+
     @Override
     protected void initialize() {
         String parserClass = config.getString(getConfigKey(SPOUT_PARSER));

@@ -29,6 +29,7 @@ import storm.applications.util.config.Configuration;
  */
 public class StormRunner {
     private static final Logger LOG = LoggerFactory.getLogger(StormRunner.class);
+    
     private static final String RUN_LOCAL  = "local";
     private static final String RUN_REMOTE = "remote";
     private static final String CFG_PATH = "/config/%s.properties";
@@ -37,7 +38,7 @@ public class StormRunner {
     public List<String> parameters = Lists.newArrayList();
     
     @Parameter(names = {"-m", "--mode"}, description = "Mode for running the topology")
-    public String mode = "local";
+    public String mode = "remote";
     
     @Parameter(names = {"-a", "--app"}, description = "The application to be executed", required = true)
     public String application;
@@ -49,7 +50,7 @@ public class StormRunner {
     public String configStr;
     
     @Parameter(names = {"-r", "--runtime"}, description = "Runtime in seconds for the topology (local mode only)")
-    public int runtimeInSeconds = 300;
+    public int runtimeInSeconds = 500;
     
     private final AppDriver driver;
     private Config config;
@@ -82,10 +83,12 @@ public class StormRunner {
             // load default configuration
             if (configStr == null) {
                 String cfg = String.format(CFG_PATH, application);
+            	LOG.info("1. Loaded default configuration file {}", cfg);
+            	//cfg = "C://Users//szhang026//Documents//storm-applications//src//main//resources//config//word-count.properties";
                 Properties p = loadProperties(cfg, (configStr == null));
             
                 config = Configuration.fromProperties(p);
-                LOG.info("Loaded default configuration file {}", cfg);
+                LOG.info("2. Loaded default configuration file {}", cfg);
             } else {
                 config = Configuration.fromStr(configStr);
                 LOG.info("Loaded configuration from command line argument");
@@ -152,6 +155,9 @@ public class StormRunner {
      */
     public static void runTopologyLocally(StormTopology topology, String topologyName,
             Config conf, int runtimeInSeconds) throws InterruptedException {
+
+        conf.setNumWorkers(4);
+
         LOG.info("Starting Storm on local mode to run for {} seconds", runtimeInSeconds);
         LocalCluster cluster = new LocalCluster();
         
@@ -188,7 +194,7 @@ public class StormRunner {
         } else {
             is = new FileInputStream(filename);
         }
-        
+       // is= new FileInputStream(filename);
         properties.load(is);
         is.close();
         

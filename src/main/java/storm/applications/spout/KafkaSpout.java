@@ -29,6 +29,8 @@ public class KafkaSpout extends AbstractSpout {
     private BrokerHosts brokerHosts;
     private static storm.kafka.KafkaSpout spout;
 
+
+
     @Override
     protected void initialize() {
         String parserClass = config.getString(getConfigKey(BaseConf.SPOUT_PARSER));
