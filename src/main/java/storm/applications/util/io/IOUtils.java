@@ -1,11 +1,17 @@
 package storm.applications.util.io;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
 
 public class IOUtils {
     public static String convertStreamToString(InputStream is) {
-        Scanner s = new Scanner(is).useDelimiter("\\A");
+    	Scanner s = null;
+    	try{
+         s= new Scanner(is).useDelimiter("\\A");
+    }catch(Exception ex){
+    	System.out.println("FUCKING error!"+ex.getMessage());
+    }
         return s.hasNext() ? s.next() : "";
     }
     

@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import storm.applications.constants.BaseConstants.BaseConf;
 import storm.applications.spout.generator.Generator;
 import storm.applications.util.config.ClassLoaderUtils;
+import storm.applications.util.config.Configuration;
 import storm.applications.util.stream.StreamValues;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +30,10 @@ public class GeneratorSpout extends AbstractSpout {
         String generatorClass = config.getString(getConfigKey(BaseConf.SPOUT_GENERATOR));
         generator = (Generator) ClassLoaderUtils.newInstance(generatorClass, "parser", LOG);
         generator.initialize(config);
+        
+    	Configuration Conf = Configuration.fromMap(config);
+    	count=Conf.getInt("count", 1000000);        
+        
     }
 
     @Override
@@ -39,6 +44,7 @@ public class GeneratorSpout extends AbstractSpout {
     		values=null;
     	}
         if (values == null) {
+        	System.out.println("Finished, try to kill");
             Map conf = Utils.readStormConfig();
             Nimbus.Client client = NimbusClient.getConfiguredClient(conf).getClient();
             try {
@@ -46,9 +52,9 @@ public class GeneratorSpout extends AbstractSpout {
               while(topologyList.size()==0)
                   topologyList = client.getClusterInfo().get_topologies();
 
-                KillOptions killOpts = new KillOptions();
+               // KillOptions killOpts = new KillOptions();
                     //killOpts.set_wait_secs(waitSeconds) // time to wait before killing
-                client.killTopologyWithOpts(topologyList.get(0).get_name(), killOpts); //provide topology name
+                client.killTopology(topologyList.get(0).get_name()); //provide topology name
 
             } catch (TException e) {
                 e.printStackTrace();
