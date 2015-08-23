@@ -3,7 +3,7 @@ package storm.applications.constants;
 import backtype.storm.Config;
 import backtype.storm.utils.Utils;
 import com.google.common.collect.ImmutableMap;
-import com.hmsonline.storm.cassandra.bolt.AckStrategy;
+//import com.hmsonline.storm.cassandra.bolt.AckStrategy;
 import java.util.Map;
 
 /**
@@ -12,7 +12,11 @@ import java.util.Map;
  */
 public interface BaseConstants {
     String BASE_PREFIX = "storm";
-    
+    public enum AckStrategy {
+        ACK_IGNORE, 
+        ACK_ON_RECEIVE, 
+        ACK_ON_WRITE;
+    }
     interface BaseConf {
         String SPOUT_THREADS     = "%s.spout.threads";
         String SPOUT_CLASS       = "%s.spout.class";

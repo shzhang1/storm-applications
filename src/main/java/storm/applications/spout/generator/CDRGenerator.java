@@ -27,9 +27,14 @@ public class CDRGenerator extends Generator {
         errorProb  = config.getDouble(Conf.GENERATOR_POPULATION, 0.05);
         
         phoneNumbers = new String[population];
-        
+        System.out.println("population:"+population);
+        try{
         for (int i=0; i<population; i++) {
             phoneNumbers[i] = CDRDataGenerator.phoneNumber("US", 11);
+        }
+        }catch(Exception ex){
+        	System.out.println("Fuck, whatever error, throw it!"+ex.getMessage());
+        	System.exit(-1);
         }
     }
     

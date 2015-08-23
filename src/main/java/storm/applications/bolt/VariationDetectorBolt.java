@@ -2,6 +2,11 @@ package storm.applications.bolt;
 
 import java.util.Map;
 
+import backtype.storm.metric.api.CountMetric;
+import backtype.storm.metric.api.MeanReducer;
+import backtype.storm.metric.api.MultiCountMetric;
+import backtype.storm.metric.api.ReducedMetric;
+import backtype.storm.task.TopologyContext;
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
@@ -22,7 +27,9 @@ public class VariationDetectorBolt extends AbstractBolt {
     private int approxInsertSize;
     private double falsePostiveRate;
     private double cycleThreshold;
-
+    transient CountMetric _countMetric;
+    transient MultiCountMetric _wordCountMetric;
+    transient ReducedMetric _wordLengthMeanMetric;
     @Override
     public Map<String, Fields> getDefaultStreamFields() {
         Map<String, Fields> streams = new HashMap<>();
@@ -44,8 +51,22 @@ public class VariationDetectorBolt extends AbstractBolt {
         learner  = new BloomFilter<>(falsePostiveRate, approxInsertSize);
         
         cycleThreshold = detector.size()/Math.sqrt(2);
-    }
 
+        initMetrics(context);
+
+
+
+    }
+    void initMetrics(TopologyContext context)
+    {
+        _countMetric = new CountMetric();
+        _wordCountMetric = new MultiCountMetric();
+        _wordLengthMeanMetric = new ReducedMetric(new MeanReducer());
+
+        context.registerMetric("execute_count", _countMetric, 5);
+        context.registerMetric("word_count", _wordCountMetric, 60);
+        context.registerMetric("word_length", _wordLengthMeanMetric, 60);
+    }
     @Override
     public void execute(Tuple input) {
         CallDetailRecord cdr = (CallDetailRecord) input.getValueByField(Field.RECORD);
@@ -72,8 +93,16 @@ public class VariationDetectorBolt extends AbstractBolt {
         
         collector.emit(values);
         collector.emit(Stream.BACKUP, values);
+
+
+        updateMetrics();
     }
-    
+    void updateMetrics()
+    {
+        _countMetric.incr();
+        //_wordCountMetric.scope(word).incr();
+        //_wordLengthMeanMetric.update(word.length());
+    }
     private void rotateFilters() {
         BloomFilter<String> tmp = detector;
         detector = learner;

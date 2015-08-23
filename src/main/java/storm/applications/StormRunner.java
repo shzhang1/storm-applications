@@ -28,6 +28,8 @@ import org.apache.thrift7.transport.TTransportException;
 import org.json.simple.JSONValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import storm.applications.constants.WordCountConstants.Conf;
 import storm.applications.topology.*;
 import storm.applications.topology.PrimitiveOperators.FilterTopology;
 import storm.applications.topology.PrimitiveOperators.WindowAggregateTopology;
@@ -43,13 +45,13 @@ public class StormRunner {
 
     private static final String RUN_LOCAL = "local";
     private static final String RUN_REMOTE = "remote";
-    private static final String CFG_PATH = "/config/%s.properties";
+    private static final String CFG_PATH = "C://Users//szhang026//Documents//storm-applications//src//main//resources//config//%s.properties";
 
     @Parameter
     public List<String> parameters = Lists.newArrayList();
 
     @Parameter(names = {"-m", "--mode"}, description = "Mode for running the topology")
-    public String mode = "remote";
+    public String mode = "local";
 
     @Parameter(names = {"-a", "--app"}, description = "The application to be executed", required = true)
     public String application;
@@ -93,12 +95,14 @@ public class StormRunner {
         try {
             // load default configuration
             if (configStr == null) {
+            
                 String cfg = String.format(CFG_PATH, application);
                 LOG.info("1. Loaded default configuration file {}", cfg);
-                //cfg = "C://Users//szhang026//Documents//storm-applications//src//main//resources//config//word-count.properties";
+                //cfg = "C://Users//szhang026//Documents//storm-applications//src//main//resources//config//voipstream.properties";
                 Properties p = loadProperties(cfg, (configStr == null));
 
                 config = Configuration.fromProperties(p);
+                config.setDebug(false);
                 LOG.info("2. Loaded default configuration file {}", cfg);
             } else {
                 config = Configuration.fromStr(configStr);
@@ -121,8 +125,7 @@ public class StormRunner {
         }
 
         // Get the topology and execute on Storm
-        StormTopology stormTopology = app.getTopology(topologyName, config);
-        //   conf.registerMetricsConsumer(LoggingMetricsConsumer.class, 2);
+        StormTopology stormTopology = app.getTopology(topologyName, config);        
         switch (mode) {
             case RUN_LOCAL:
                 runTopologyLocally(stormTopology, topologyName, config, runtimeInSeconds);
@@ -196,41 +199,50 @@ public class StormRunner {
     public static void runTopologyRemotely(StormTopology topology, String topologyName,
                                            Config conf) throws AlreadyAliveException, InvalidTopologyException {
 
-        conf.registerMetricsConsumer(LoggingMetricsConsumer.class, 2);
-        conf.put(Config.NIMBUS_HOST, "172.21.149.58");
-        Map storm_conf = Utils.readStormConfig();
-        storm_conf.put("nimbus.host", "172.21.149.58");
-
-        String inputJar = "C:\\Users\\szhang026\\Documents\\storm-applications\\test.jar";
-
-        try {
-            NimbusClient nimbus = new NimbusClient(storm_conf, "172.21.149.58",
-                    6627);
-            // upload topology jar to Cluster using StormSubmitter
-            String uploadedJarLocation = StormSubmitter.submitJar(storm_conf,
-                    inputJar);
-
-            String jsonConf = JSONValue.toJSONString(storm_conf);
-            nimbus.getClient().submitTopology(topologyName,
-                    uploadedJarLocation, jsonConf, topology);
-        } catch (TTransportException e) {
-            e.printStackTrace();
-        } catch (TException e) {
-            e.printStackTrace();
-        }
-        // StormSubmitter.submitTopology(topologyName, conf, topology);
+    	//conf.registerMetricsConsumer(LoggingMetricsConsumer.class, 2);
+    	
+    	Configuration Conf = Configuration.fromMap(conf);
+    	conf.setNumWorkers(Conf.getInt("num_workers", 1));    
+    	
+//    	conf.put(Config.TOPOLOGY_EXECUTOR_SEND_BUFFER_SIZE,16384);
+//    	conf.put(Config.TOPOLOGY_EXECUTOR_RECEIVE_BUFFER_SIZE,16384);
+//    	conf.put(Config.TOPOLOGY_RECEIVER_BUFFER_SIZE, 8);
+//    	conf.put(Config.TOPOLOGY_TRANSFER_BUFFER_SIZE, 1024);
+    	
+//    	conf.put(Config.NIMBUS_HOST, "155.69.149.213");
+//        Map storm_conf = Utils.readStormConfig();
+//        storm_conf.put("nimbus.host", "155.69.149.213");
+//
+//        String inputJar = "C:\\Users\\szhang026\\Documents\\storm-applications\\test.jar";
+//
+//        try {
+//            NimbusClient nimbus = new NimbusClient(storm_conf, "155.69.149.213",
+//                    6627);
+//            // upload topology jar to Cluster using StormSubmitter
+//            String uploadedJarLocation = StormSubmitter.submitJar(storm_conf,
+//                    inputJar);
+//
+//            String jsonConf = JSONValue.toJSONString(storm_conf);
+//            nimbus.getClient().submitTopology(topologyName,
+//                    uploadedJarLocation, jsonConf, topology);
+//        } catch (TTransportException e) {
+//            e.printStackTrace();
+//        } catch (TException e) {
+//            e.printStackTrace();
+//        }
+         StormSubmitter.submitTopology(topologyName, conf, topology);
     }
 
     public static Properties loadProperties(String filename, boolean classpath) throws IOException {
         Properties properties = new Properties();
         InputStream is;
 
-        if (classpath) {
-            is = StormRunner.class.getResourceAsStream(filename);
-        } else {
-            is = new FileInputStream(filename);
-        }
-        // is= new FileInputStream(filename);
+//        if (classpath) {
+//            is = StormRunner.class.getResourceAsStream(filename);
+//        } else {
+//            is = new FileInputStream(filename);
+//        }
+         is= new FileInputStream(filename);
         properties.load(is);
         is.close();
 

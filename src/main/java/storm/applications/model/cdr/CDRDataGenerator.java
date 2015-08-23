@@ -126,12 +126,19 @@ public class CDRDataGenerator {
             String strJson;
             
             if (JavaUtils.isJar()) {
-                InputStream is = CDRDataGenerator.class.getResourceAsStream("/CountryCodes.json");
+                InputStream is = CDRDataGenerator.class.getResourceAsStream("/resources/CountryCodes.json");
+                //System.out.println("is:"+is.read());
+                if(is==null){
+                	System.out.println("Fuck, is is null!!!");
+                	System.exit(-1);
+                	
+                	
+                }
                 strJson = IOUtils.convertStreamToString(is);
             } else {
                 strJson = Files.toString(new File("src/main/resources/CountryCodes.json"), Charset.defaultCharset());
             }
-            
+            //strJson = Files.toString(new File("C://Users//szhang026//Documents//storm-applications//src//main//resources//CountryCodes.json"), Charset.defaultCharset());
             countryArray = (JSONArray) new JSONParser().parse(strJson);
             countryMap = new HashMap<>(countryArray.size());
             
@@ -140,9 +147,14 @@ public class CDRDataGenerator {
                 countryMap.put((String)json.get("code"), (String)json.get("dial_code"));
             }
         } catch (IOException ex) {
-            LOG.error("Error reading country codes file", ex);
+            LOG.info("Error reading country codes file", ex);
+            System.exit(-1);
         } catch (ParseException ex) {
-            LOG.error("Error parsing country codes file", ex);
+            LOG.info("Error parsing country codes file", ex);
+            System.exit(-1);
+        }catch(Exception ex){
+        	System.out.println("Fuck!!!!"+ex.getMessage());
+        	System.exit(-1);
         }
     }
     
