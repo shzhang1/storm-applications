@@ -26,3 +26,6 @@ nbactions.xml
 
 # log files
 .log
+output/CDR/10workers/1_10_1_10_1/received.sink.58.csv
+output/CDR/received_sink.xlsx
+output/CDR/~$received_sink.xlsx
