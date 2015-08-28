@@ -184,8 +184,8 @@ public class STREAM {
 
 
  public static void main(String args[]) {
-   int num_threads = 64;//Integer.parseInt(args[0]);
-
+   //int num_threads = 64;//Integer.parseInt(args[0]);
+   int num_threads =Integer.parseInt(args[0]);
    System.out.println("=== Warmup 0");
    new STREAM().run(0);
    System.out.println("=== Warmup 1");
